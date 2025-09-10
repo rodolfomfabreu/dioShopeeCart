@@ -11,12 +11,30 @@ async function deleteItem(userCart, name) {
     }
 }
 
-async function removeItem(userCart, index) {
+async function deleteItemByIndex(userCart, index) {
+    const deleteIndex = index -1;
+    if (index >= 0 && index < userCart.length) {
+        userCart.splice(deleteIndex, 1);
+    }
+}
 
+async function removeItem(userCart, index) {
+    const deleteIndex = index -1;
+    if (index > 0 && index < userCart.length) {
+        userCart.splice(deleteIndex, 1);
+    }
 }
 
 async function calculateTotal(userCart) {
+    console.log(`\nShopee Cart Total is:`);
     console.log(userCart.reduce((total, item) => total + item.subtotal(), 0));
 }
 
-export { addItem, deleteItem, removeItem, calculateTotal };
+async function displayCart(userCart) {
+    console.log(`\nShopee Cart list is:`);
+    userCart.forEach((item, index) => {
+        console.log(`${index + 1} | (${item.quantity}) ${item.name} - $${item.price} - subtotal: $${item.subtotal()}`);
+    });;
+}
+
+export { addItem, deleteItem, deleteItemByIndex, removeItem, displayCart, calculateTotal };
